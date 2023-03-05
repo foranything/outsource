@@ -6,10 +6,10 @@ dotenv.config();
 export async function getInfo(): Promise<(string | undefined)[] | undefined> {
   try {
     const browser = await puppeteer.launch({
-      args: ['--no-sandbox']
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
-    page.setDefaultTimeout(3000);
+    page.setDefaultTimeout(10000);
     await login(browser);
     const ids = await getPageItemIds(browser);
     const info = [];
